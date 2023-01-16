@@ -1,18 +1,19 @@
 import React from 'react';
-import axios from '../../services/axios';
+import { useDispatch } from 'react-redux';
 
 import { Container } from '../../styles/GlobalStyles';
 import { Title, Paragrafo } from './styled';
 
 export default function Login() {
-  React.useEffect(() => {
-    async function getData() {
-      const response = await axios.get('/aluno');
-      console.log(response);
-    }
+  const dispatch = useDispatch();
 
-    getData();
-  }, []);
+  function handleClick(e) {
+    e.preventDefault();
+
+    dispatch({
+      type: 'BUTTON_CLICKED',
+    });
+  }
 
   return (
     <Container>
@@ -21,7 +22,10 @@ export default function Login() {
         <small> Minitexto</small>
       </Title>
       <Paragrafo> Lorem ipsum dolor sit amed.</Paragrafo>
-      <button type="button"> Enviar </button>
+      <button type="button" onClick={handleClick}>
+        {' '}
+        Enviar{' '}
+      </button>
     </Container>
   );
 }
